@@ -14,7 +14,7 @@ public class ToDo {
     private String work;
     @Column(length = 180)                                //0.0.009->for changing field
     private String description;
-    private String imageurl;
+    private String imageUrl;
 
     public ToDo() {
         super();
@@ -52,12 +52,12 @@ public class ToDo {
         this.description = description;
     }
 
-    public String getImageurl() {
-        return imageurl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setImageurl(String imageurl) {
-        this.imageurl = imageurl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
 
