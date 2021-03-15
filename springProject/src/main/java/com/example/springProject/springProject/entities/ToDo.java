@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity                                               //0.0.006->defines entity
-@Table(name="Todo")                                   //0.0.007->for changing tables in database
+@Table(name = "Todo")                                   //0.0.007->for changing tables in database
+
+/**/
+/*This Method will define to-do properties. Added Getter Setter &
+/**/
+
 public class ToDo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)     //0.0.008->for changing tables in database
     private int id;
     private String time;
     private String work;
-    @Column(length = 180)                                //0.0.009->for changing field
+    @Column(length = 180)                            //0.0.009->for changing field
     private String description;
     private String imageUrl;
 
@@ -60,7 +65,7 @@ public class ToDo {
         this.imageUrl = imageUrl;
     }
 
-
+    /*ManyToOne mapping for user's to do functionality*/
     @ManyToOne
     private User user;
 

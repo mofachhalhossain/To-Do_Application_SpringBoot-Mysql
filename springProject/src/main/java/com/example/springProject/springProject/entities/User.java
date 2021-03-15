@@ -9,9 +9,11 @@ import java.util.List;
 import java.util.Set;
 
 @Entity                                   //0.0.001->defines entity
-@Table(name ="User")                      //0.0.002->for changing tables in database
+@Table(name = "User")                      //0.0.002->for Defining tables in database
 
-
+/**/
+/*This Method will define user properties. Added Getter Setter & To-String*/
+/**/
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)        //0.0.003->for generating auto value
@@ -79,10 +81,26 @@ public class User {
         this.imageUrl = imageUrl;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user")         // for specifing database relation // CascadeType.ALL will help like when user will be deleted do will delete automatic
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", todo=" + todo +
+                '}';
+    }
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    // for specifing database relation // CascadeType.ALL will help like when user will be deleted do will delete automatic
     //visit: https://howtodoinjava.com/hibernate/how-to-define-association-mappings-between-hibernate-entities/
 
+
     public List<ToDo> todo;
+
     {
         todo = new ArrayList<>();
     }
@@ -93,6 +111,10 @@ public class User {
 
     public void setTodo(List<ToDo> todo) {
         this.todo = todo;
+    }
+
+    /*Check HomeController*/
+    public void setEnabled(boolean enabled) {
     }
 }
 
