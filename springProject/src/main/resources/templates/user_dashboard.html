@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+</head>
+<body>
+<section class="d-flex">
+    <div>
+        <h6>Hey! Your are user here</h6>
+        <h6>And this is your dashboard</h6>
+        <h5><font style="text-align:left">Your Name <span th:text="${user.name}"></span></h5>
+        <h5>Your Mail <span th:text="${user.email}"></span></h5>
+    </div>
+</section>
+</body>
+</html>
