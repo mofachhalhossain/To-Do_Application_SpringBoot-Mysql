@@ -11,9 +11,9 @@
 
             <div class="col-md-6 offset-md-3">
 
-                <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                <div th:if="${session.message}" class="alert" role="alert">
                     <p class="text-center" th:text="${session.message.content}"></p> <!-- User Alert Message -->
-                    <!--<th:block th:text="${#session.removeAttribute('message')}"></th:block> -->
+                    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
                 </div>
 
                 <h1 class="text-center">Sign Up Here</h1>

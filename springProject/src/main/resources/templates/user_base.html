@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" th:href="@{/style.css}">
-    
+
     <!--/*@thymesVar id="title" type="templates"*/-->
-    <title th:text="${title}">Base HTML</title>
+    <title th:text="${title}">User Base HTML</title>
 </head>
 <body>
 
@@ -61,8 +62,34 @@
 
 <!-- End Navbar -->
 
+<!--sidebar-->
+<div class="sidebar">
+    <a href="" th:href="@{/user/home_dashboard}" class="item">Home</a>
+    <a href="" class="item">Profile</a>
+    <a href="" th:href="@{/user/show_dashboard}" class="item">Dashboard</a>
+    <a href="" th:href="@{/user/write_ToDo}" class="item">Write TO-DO</a>
 
-<div th:replace="${content}"></div>
+</div>
+
+<!--message box-->
+
+<div th:if="${session.message}" class="container">
+
+    <div th:classappend="${'alert-' +session.message.type}" class="alert text-center" role="alert">
+        <span th:text="${session.message.content}"></span>
+    </div>
+
+    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+</div>
+
+
+<!--End sidebar-->
+<!--Content area-->
+<div class="content">
+    <div th:replace="${content}"></div>
+</div>
+
 
 <!-- Optional JavaScript; choose one of the two! -->
 

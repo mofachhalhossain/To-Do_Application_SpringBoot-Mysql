@@ -76,4 +76,16 @@ public class ToDo {
     public void setUser(User user) {
         this.user = user;
     }
+
+    /*@Override
+    public String toString() {
+        return "ToDo{" +
+                "id=" + id +
+                ", time='" + time + '\'' +
+                ", work='" + work + '\'' +
+                ", description='" + description + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", user=" + user +
+                '}';
+    }*/
 }

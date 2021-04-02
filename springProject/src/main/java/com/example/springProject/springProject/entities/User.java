@@ -4,6 +4,8 @@ package com.example.springProject.springProject.entities;
 import org.springframework.data.util.Lazy;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,14 +21,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)        //0.0.003->for generating auto value
     private int id;
 
-    @Column(length = 20)                       //0.0.004->for changing field
+    @Column(length = 20)                                //0.0.004->for changing field
+
+    @NotBlank(message = "Please insert your name")       /*validator*/
+    @Size(min = 3, max = 16, message = "3-16 characters are allowed")      /*validating charecter size*/
     private String name;
     @Column(unique = true)                     //0.0.005->changing field
     private String email;
     private String password;
     private String role;
     private String imageUrl;
-
 
 
     public User() {
@@ -116,5 +120,6 @@ public class User {
     /*Check HomeController*/
     public void setEnabled(boolean enabled) {
     }
+
 }
 

@@ -3,7 +3,9 @@ package com.example.springProject.springProject.Controller;
 import com.example.springProject.springProject.Dao.UserRepository;
 import com.example.springProject.springProject.entities.User;
 import com.example.springProject.springProject.helper.message;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.table.DefaultTableModel;
+import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class HomeController {
@@ -32,6 +36,10 @@ public class HomeController {
     /*Autorwiring Jpa Repository*/
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
 
     //Home Handler
     @RequestMapping("/")
@@ -65,7 +73,7 @@ public class HomeController {
             /*will check agreement checkbox in signup page*/
             if (!agreement) {
                 System.out.println("Not agreed");
-                throw new Exception("Please agree terms and condition");      // Interect Interface
+                throw new Exception("Please agree terms and condition");      // Interact Interface
             } else {
                 System.out.println("Agreed");
             }
@@ -73,6 +81,9 @@ public class HomeController {
             /*Default user role as User*/
             user.setRole("ROLE_USER");
             user.setEnabled(true);
+
+            /*Injecting bcriptPasswordEncoder*/
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
 
             /*Default ImageURL*/
             user.setImageUrl("default.png");
@@ -83,18 +94,45 @@ public class HomeController {
             /*save user input through jpa repository*/
             User result = this.userRepository.save(user);
 
-            model.addAttribute("user", new User());
+            /*message class for showing message*/
             session.setAttribute("message", new message("Successful", "alert_success"));
+
+            model.addAttribute("user", new User());
 
             return "signup";
         } catch (Exception e) {
             e.printStackTrace();        //shows error message in run
             model.addAttribute("user", user);
-            session.setAttribute("message", new message("Went wrong!! " + e.getMessage(), "alert_danger"));
+            session.setAttribute("message", new message("Went wrong!! " + e.getMessage(), "alert_error"));
         }
 
-
         return "signup";
+    }
+
+    /**/
+    /*#Not Necessary*/
+    /**/
+    /*@RequestMapping("/user_dashboard")
+    public String UserDashboard(Model model) {
+        model.addAttribute("title", "User_Dashboard");
+        return "user_dashboard";
+    }*/
+
+
+    UserController controller = new UserController();
+
+    @RequestMapping("/user_dashboard")
+    public UserController getController(Model model) {
+
+        return controller;
+    }
+
+
+    //User Login Handler
+    @GetMapping("/Login")
+    public String login(Model model) {
+        model.addAttribute("title", "login");
+        return "login";
     }
 
 
