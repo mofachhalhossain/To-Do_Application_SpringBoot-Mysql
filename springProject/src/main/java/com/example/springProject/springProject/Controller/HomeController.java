@@ -118,7 +118,6 @@ public class HomeController {
         return "user_dashboard";
     }*/
 
-
     UserController controller = new UserController();
 
     @RequestMapping("/user_dashboard")
@@ -132,6 +131,12 @@ public class HomeController {
     @GetMapping("/Login")
     public String login(Model model) {
         model.addAttribute("title", "login");
+        return "login";
+    }
+
+    @RequestMapping("/login")
+    public String startButton(Model model) {
+        model.addAttribute("title", "about");
         return "login";
     }
 

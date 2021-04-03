@@ -88,4 +88,10 @@ public class ToDo {
                 ", user=" + user +
                 '}';
     }*/
+
+    @Override
+    public boolean equals(Object obj) {
+        return this.id == ((ToDo) obj).getId();
+    }
+
 }

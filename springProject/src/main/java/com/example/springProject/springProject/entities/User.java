@@ -98,13 +98,12 @@ public class User {
                 '}';
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "user", orphanRemoval = true)
     // for specifing database relation // CascadeType.ALL will help like when user will be deleted do will delete automatic
     //visit: https://howtodoinjava.com/hibernate/how-to-define-association-mappings-between-hibernate-entities/
 
 
     public List<ToDo> todo;
-
     {
         todo = new ArrayList<>();
     }

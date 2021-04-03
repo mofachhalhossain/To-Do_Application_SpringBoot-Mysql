@@ -119,17 +119,34 @@ public class UserController {
 
     /*Delete Button Handler*/
     @GetMapping("/delete/{id}")
-    public String deleteTodo(@PathVariable("id") Integer id, Model model, HttpSession session) {
+    public String deleteTodo(@PathVariable("id") Integer id, Model model, HttpSession session, Principal principal) {
 
         Optional<ToDo> toDoOptional = this.toDoRepository.findById(id);
         ToDo toDo = toDoOptional.get();
 
-        toDo.setUser(null);
+        /*For delete info in database also*/
+        User user = this.userRepository.getUserByUserName(principal.getName());
+        user.getTodo().remove(toDo);
+        this.userRepository.save(user);
 
-        this.toDoRepository.delete(toDo);
+
+        /*For keep record in database*/
+        /*toDo.setUser(null);
+
+        this.toDoRepository.delete(toDo);*/
+
+
         session.setAttribute("message", new message("Deleted Successfully", "Successful"));
 
-        return "home_dashboard";
+        return "delete_success";
+    }
+
+    /*User profile*/
+    @RequestMapping("/profile")
+    public String userProfile(Model model) {
+        model.addAttribute("title", "Profile");
+
+        return "profile";
     }
 
 
