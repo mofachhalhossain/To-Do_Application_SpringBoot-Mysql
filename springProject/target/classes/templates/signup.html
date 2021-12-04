@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>This is about page</title>
+</head>
+<body>
+<section>
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-6 offset-md-3">
+
+                <div th:if="${session.message}" class="alert" role="alert">
+                    <p class="text-center" th:text="${session.message.content}"></p> <!-- User Alert Message -->
+                    <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                </div>
+
+                <h1 class="text-center">Sign Up Here</h1>
+
+                <form action="" th:action="@{/do-register}" method="post" th:object="${user}">
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Name</label>
+                        <input name="name" type="text" class="form-control" id="exampleInputName"
+                               aria-describedby="emailHelp" required th:value="${user.name}">
+                        <div id="name" class="form-text">Type your real-name for register</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Email address</label>
+                        <input name="email" type="email" class="form-control" id="exampleInputEmail1"
+                               aria-describedby="emailHelp" required th:value="${user.email}">
+                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                        <input name="password" type="password" class="form-control" id="exampleInputPassword1" required>
+                        <div id="password" class="form-text">Put your Password</div>
+                    </div>
+
+
+                    <!--Terms and condition agreement -->
+                    <div class="form-group form-check">
+                        <input type="checkbox" name="agreement" class="form-check-input" id="agreement"/>
+                        <label for="agreement">Accept Terms and condition</label>
+                    </div>
+
+
+                    <div class="container">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-dark">Reset</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
